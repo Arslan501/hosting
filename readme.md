@@ -3,7 +3,6 @@
 - Set repo of project inside image file without .env file
 - Create env file inside envoirnment_files directory
 - Now to run project execute following command ***( docker-compose up -d )*** 
-- After that run **sh bash-scripts/run-project.sh** bash-scripts directory.
 
 ## *2. To get IP of container run following commands*
 - To check containerID run ***( docker ps )***

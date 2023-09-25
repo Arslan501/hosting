@@ -19,16 +19,17 @@ services:
 
 # Laravel APP Container Configurations
   laravel_app:
-    image: laravel-sample-app
+    image: arslan501/laravel-hosting:latest
     container_name: sample-app
     restart: unless-stopped
     tty: true
-    build:
-      context: .
-      dockerfile: Dockerfile
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile
     volumes:
       - ./nginx:/etc/nginx/sites-available
       - ./envoirnment_files/.env:/var/www/laravel-sample-app/.env
+    command: bash -c "sudo composer update && sudo php artisan migrate" 
     ports:
       - "80:80"
 
@@ -45,7 +46,7 @@ services:
   # adminer:
   #   image: adminer
   #   environment:
-  #     ADMINER_DEFAULT_SERVER: wordpress_app
+  #     ADMINER_DEFAULT_SERVER: laravel_app
   #   restart: always
   #   ports:
   #     - 8080:8080
