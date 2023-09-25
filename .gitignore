@@ -1,0 +1,5 @@
+# Ignore env file
+envoirnment_files/.env
+
+# Ignore SSH creds
+ssh-key/
