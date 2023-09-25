@@ -10,7 +10,7 @@ services:
       - mysql-volume:/var/lib/mysql
     environment:
       MYSQL_DATABASE: 'sample_app'
-      MYSQL_ROOT_PASSWORD: 'wordpress@123'
+      MYSQL_ROOT_PASSWORD: 'laravel@123'
     ports:
       - '3306:3306'
     tty: true 
