@@ -1,0 +1,54 @@
+# Version of docker compose yaml file
+version: '3.9'
+
+services:
+# MySQL Container
+  mysql_db:
+    image: mysql:8.0
+    container_name: mysql
+    volumes:
+      - mysql-volume:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: 'sample_app'
+      MYSQL_ROOT_PASSWORD: 'wordpress@123'
+    ports:
+      - '3306:3306'
+    tty: true 
+    restart: unless-stopped
+
+
+# Laravel APP Container Configurations
+  laravel_app:
+    image: laravel-sample-app
+    container_name: sample-app
+    restart: unless-stopped
+    tty: true
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./nginx:/etc/nginx/sites-available
+      - ./envoirnment_files/.env:/var/www/laravel-sample-app/.env
+    ports:
+      - "80:80"
+
+# To connect with database 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_ARBITRARY: 1
+
+    restart: always
+    ports:
+      - 81:80
+
+  # adminer:
+  #   image: adminer
+  #   environment:
+  #     ADMINER_DEFAULT_SERVER: wordpress_app
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+
+volumes:
+  mysql-volume:
